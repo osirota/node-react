@@ -1,0 +1,12 @@
+{
+    "name": "modulesapp",
+    "version": "1.0.0",
+    "scripts": {
+        "start": "nodemon server.js"
+    },
+    "dependencies": {
+        "ejs": "^2.6.2",
+        "express": "^4.17.1",
+        "nodemon": "^1.19.1"
+    }
+}
