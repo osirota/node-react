@@ -1,28 +1,25 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-
 const app = express();
+require('dotenv').config()
 
 
-const db = require("./models");
-const apiPersonal = require("./api/personal");
+import { sequelize } from './models/index';
+import { apiPersonal } from "./api/personal";
+import { apiDepartment } from "./api/department";
 
+
+const port = process.env.PORT;
 
 app.use(bodyParser.json());
 
 app.set("view engine", "ejs");
 
-apiPersonal(app, db);
+apiPersonal(app, sequelize);
+apiDepartment(app, sequelize);
 
-app.get("/", function(request, response){
- 
-    response.render("index", {
-        title: "Мои контакты",
-        emailsVisible: true,
-        emails: ["gavgav@mycorp.com", "mioaw@mycorp.com"],
-        phone: "+1234567890"
-    });
-});
-
-
-app.listen(3000);
+sequelize.sync({ force: true }).then(result=>{
+    console.log(`Your port is http://localhost:${port}/`);
+  })
+  .catch(err=> console.log(err));
+app.listen(port);

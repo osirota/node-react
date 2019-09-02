@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTypes) => {
+export const departmentTable = (sequelize, DataTypes) => {
     const Department = sequelize.define('department', {
         department_id: {
           type: DataTypes.INTEGER,
