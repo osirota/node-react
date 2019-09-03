@@ -6,11 +6,21 @@
 </head>
 <body>
      
-    <h1>Add department</h1>
-     
-    <form action="">
-        <input type="text" placeholder="Name Deparment" name="department">
-        <button type="submit">Submit</button>
-    </form>
+    <h1>Departments</h1>
+    <a href="/department/add">Add Department</a>
+    
+    <div>
+        <% for(var i=0; i < department.length; i++) {%>
+            <div>
+                <p class="name"><%= department[i].department_name %></p>
+                <a href="/department/edit/<%= department[i].department_id %>" class="">Edit Department</a>
+                <a href="/personal/add/<%= department[i].department_id %>" class="">Add Personal<a>
+                <a href="#" class="">All Personal<a>
+                <form action="/department/delete/<%= department[i].department_id %>" method="POST" style="display:inline;">
+                    <input type="submit" value="Delete Department" />
+                </form>
+            </div>
+        <%} %>
+    </ul>
 </body>
 <html>

@@ -4,7 +4,7 @@ const app = express();
 require('dotenv').config()
 
 
-import { sequelize } from './models/index';
+import { db } from './models/index';
 import { apiPersonal } from "./api/personal";
 import { apiDepartment } from "./api/department";
 
@@ -12,13 +12,16 @@ import { apiDepartment } from "./api/department";
 const port = process.env.PORT;
 
 app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
 
 app.set("view engine", "ejs");
 
-apiPersonal(app, sequelize);
-apiDepartment(app, sequelize);
+apiPersonal(app, db);
+apiDepartment(app, db);
 
-sequelize.sync({ force: true }).then(result=>{
+db.sequelize.sync().then(result=>{
     console.log(`Your port is http://localhost:${port}/`);
   })
   .catch(err=> console.log(err));

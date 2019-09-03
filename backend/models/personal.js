@@ -10,6 +10,7 @@ export const personalTable = (sequelize, DataTypes) => {
         personal_email: DataTypes.STRING,
         personal_salary: DataTypes.INTEGER,
         personal_date_started_work: DataTypes.DATE,
+        personal_department_id: DataTypes.INTEGER
       },
       {
         freezeTableName: true,
