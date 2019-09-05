@@ -1,13 +1,10 @@
 export const departmentTable = (sequelize, DataTypes) => {
   const Department = sequelize.define('department', {
-      department_id: {
+      id: {
         type: DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true,
-        references: { 
-          model: 'personal',
-          key: 'department_id'
-        },
+        allowNull: false
       },
       department_name: DataTypes.STRING,
     },
@@ -17,7 +14,7 @@ export const departmentTable = (sequelize, DataTypes) => {
   );
 
   Department.associate = (models) => {
-    Department.hasMany(models.personal, { onDelete: 'cascade' });
+    Department.hasMany(models.personal);
   };
 
   return Department;

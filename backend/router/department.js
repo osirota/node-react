@@ -27,7 +27,7 @@ export const apiDepartment = (app, db) => {
         department_name: req.body.department
       },
       {
-        where: { department_id: req.params.id }
+        where: { id: req.params.id }
       })
       .then(() => res.redirect('/'))
       .catch( err => console.log(err))
@@ -36,7 +36,7 @@ export const apiDepartment = (app, db) => {
     app.post('/department/delete/:id', (req, res) => {
       db.department.destroy({
         where: {
-          department_id: req.params.id
+          id: req.params.id
         }
       }).then(() => res.redirect('/'))
     });

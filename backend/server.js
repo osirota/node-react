@@ -1,13 +1,12 @@
-const express = require("express");
-const bodyParser = require("body-parser");
-const app = express();
+import express from 'express';
+import bodyParser from 'body-parser';
+
+import { db } from './models';
+import routes from "./router";
+
 require('dotenv').config()
 
-
-import { db } from './models/index';
-import { apiPersonal } from "./api/personal";
-import { apiDepartment } from "./api/department";
-
+const app = express();
 
 const port = process.env.PORT;
 
@@ -18,11 +17,12 @@ app.use(bodyParser.urlencoded({
 
 app.set("view engine", "ejs");
 
-apiPersonal(app, db);
-apiDepartment(app, db);
+routes(app, db)
 
-db.sequelize.sync().then(result=>{
+db.sequelize.sync()
+  .then(result=>{
     console.log(`Your port is http://localhost:${port}/`);
   })
   .catch(err=> console.log(err));
+
 app.listen(port);
