@@ -1,26 +1,13 @@
-export const personalTable = (sequelize, DataTypes) => {
-    const Personal = sequelize.define('personal', {
-        id: {
-          type: DataTypes.INTEGER,
-          primaryKey: true,
-          autoIncrement: true,
-        },
-        personal_firstName: DataTypes.STRING,
-        personal_lastName: DataTypes.STRING,
-        personal_email: DataTypes.STRING,
-        personal_salary: DataTypes.INTEGER,
-        personal_date_started_work: DataTypes.DATE
-      },
-      {
-        freezeTableName: true,
-      }
-    );
+export const personalTable = (mongoose) => {
+  const personalSchema = new mongoose.Schema({
+    personal_firstName: String,
+    personal_lastName: String,
+    personal_email: String,
+    personal_salary: Number,
+    personal_date_started_work: Date
+  });
+
+  const Personal = mongoose.model('Personal', personalSchema);
   
-    Personal.associate = (models) => {
-        Personal.belongsTo(models.department, {
-          onDelete: 'cascade',
-        });
-    };
-  
-    return Personal;
+  return Personal;
   }

@@ -19,10 +19,5 @@ app.set("view engine", "ejs");
 
 routes(app, db)
 
-db.sequelize.sync()
-  .then(result=>{
-    console.log(`Your port is http://localhost:${port}/`);
-  })
-  .catch(err=> console.log(err));
 
 app.listen(port);

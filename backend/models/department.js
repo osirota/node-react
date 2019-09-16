@@ -1,21 +1,10 @@
-export const departmentTable = (sequelize, DataTypes) => {
-  const Department = sequelize.define('department', {
-      id: {
-        type: DataTypes.INTEGER,
-        primaryKey: true,
-        autoIncrement: true,
-        allowNull: false
-      },
-      department_name: DataTypes.STRING,
-    },
-    {
-      freezeTableName: true,
-    }
-  );
+export const departmentTable = (mongoose) => {
+  const departmentSchema = new mongoose.Schema({
+    department_name: String
+  });
 
-  Department.associate = (models) => {
-    Department.hasMany(models.personal);
-  };
+  const Department = mongoose.model('Department', departmentSchema)
+
 
   return Department;
 }

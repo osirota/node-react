@@ -1,22 +1,18 @@
-const Sequelize = require("sequelize");
+import mongoose from 'mongoose';
+
 import { personalTable } from './personal';
 import { departmentTable } from './department';
 
-const sequelize = new Sequelize("nodejs", "root", "a1s2d3f4", {
-  dialect: "mysql",
-  host: "localhost",
-  port: 3306
+mongoose.connect("mongodb://localhost:2707/test", {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
 });
 
-const personal = personalTable(sequelize, Sequelize);
-const department = departmentTable(sequelize, Sequelize);
-
-personal.associate(sequelize.models);
-department.associate(sequelize.models);
+const personal = personalTable(mongoose);
+const department = departmentTable(mongoose);
 
 export const db = {
-  sequelize,
-  Sequelize,
+  mongoose,
   personal,
-  department
+  department,
 }
