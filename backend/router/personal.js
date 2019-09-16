@@ -3,8 +3,10 @@ export const apiPersonal = (app, db) => {
     db.personal.findAll().then((personals) => res.render('personals', { personals }))
   );
   
-  app.get( "/personal/add/:id", (req, res) =>
-    res.render('personal', { action: `/add/personal/${req.params.id}` })
+  app.get( "/personal/add/:id", (req, res) => {
+    const { params: id } = req;
+    res.render('personal', { action: `/add/personal/${id}` })
+  }
   );
   app.post( "/personal/add/:id", (req, res) => {
     const {
@@ -12,10 +14,11 @@ export const apiPersonal = (app, db) => {
       last_name,
       email,
       salary,
-      datetime
+      datetime,
+      params: {
+        id
+      }
     } = req.body;
-
-    const { id } = req.params;
 
     db.personal.create({
       personal_firstName: first_name,
