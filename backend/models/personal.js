@@ -4,10 +4,11 @@ export const personalTable = (mongoose) => {
     personal_lastName: String,
     personal_email: String,
     personal_salary: Number,
-    personal_date_started_work: Date
+    personal_date_started_work: Date,
+    department_id: mongoose.Schema.Types.ObjectId
   });
 
   const Personal = mongoose.model('Personal', personalSchema);
-  
+
   return Personal;
-  }
+}

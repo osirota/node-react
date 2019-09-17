@@ -1,6 +1,7 @@
 export const apiPersonal = (app, db) => {
+  const { personal } = db;
   app.get( "/personals", (req, res) =>
-    db.personal.findAll().then((personals) => res.render('personals', { personals }))
+    personal.findAll().then((personals) => res.render('personals', { personals }))
   );
   
   app.get( "/personal/add/:id", (req, res) => {
@@ -10,25 +11,31 @@ export const apiPersonal = (app, db) => {
   );
   app.post( "/personal/add/:id", (req, res) => {
     const {
-      first_name,
-      last_name,
-      email,
-      salary,
-      datetime,
+      body: { 
+        first_name,
+        last_name,
+        email,
+        salary,
+        datetime,
+      },
       params: {
         id
       }
-    } = req.body;
-
-    db.personal.create({
+    } = req;
+    
+    const addPersonal = new personal({
       personal_firstName: first_name,
       personal_lastName: last_name,
       personal_email: email,
       personal_salary: salary,
       personal_date_started_work: datetime,
-      departmentId: id,
-    })
-    .then(() => res.redirect('/'))
-    .catch( err => console.log(err))
+      department_id: id,
+    });
+
+    addPersonal.save(err => {
+        if (err) return res.render(err)
+        res.redirect('/')
+    });
+
   });
 }

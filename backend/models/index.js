@@ -3,9 +3,15 @@ import mongoose from 'mongoose';
 import { personalTable } from './personal';
 import { departmentTable } from './department';
 
-mongoose.connect("mongodb://localhost:2707/test", {
+mongoose.connect("mongodb://localhost:27017/test", {
   useNewUrlParser: true,
-  useUnifiedTopology: true,
+})
+
+const MongoDB = mongoose.connection;
+
+MongoDB.on('error', function(err) { console.log(err.message); });
+MongoDB.once('open', function() {
+  console.log("mongodb connection open");
 });
 
 const personal = personalTable(mongoose);

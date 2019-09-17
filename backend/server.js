@@ -20,4 +20,6 @@ app.set("view engine", "ejs");
 routes(app, db)
 
 
-app.listen(port);
+app.listen(port, () => {
+  console.log(`Server listening on http://localhost:${port}/ `);
+});

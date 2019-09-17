@@ -1,43 +1,60 @@
 export const apiDepartment = (app, db) => {
+    const { department } = db;
     app.get( "/department/add", (req, res) =>
-        res.render('department', { action: "/department/add" })
+        res.render('department', { action: "/department/add", isUpdating: false, })
     );
 
     app.post( "/department/add", (req, res) => {
-      db.department.create({
-        department_name: req.body.department
-      })
-      .then(() => res.redirect('/'))
-      .catch( err => console.log(err))
+      const addDepartment = new department({
+        department_name: req.body.department,
+      });
+
+      addDepartment.save(err => {
+        if (err) return res.render(err)
+        res.redirect('/')
+      });
+
     });
     
     app.get('/', (req, res) => {
-      db.department.findAll().then(department => res.render('index', { department }));
+      department.find((err, department) => res.render('index', { department }));
     });
 
 
     app.get("/department/edit/:id", (req, res) => {
-      res.render('department', {
-        action: `/department/add/${req.params.id}`
-      })
+      const { id } = req.params;
+
+      department.findById(id, (err, department) => {
+
+        if (err) return res.render(err);
+
+        res.render('department', {
+          action: `/department/edit/${id}`,
+          department_name: department.department_name,
+          isUpdating: true
+        });
+        
+      });
     });
 
     app.post("/department/edit/:id", (req, res) => {
-      db.department.update({
-        department_name: req.body.department
-      },
+      department.updateOne({ 
+        _id: req.params.id 
+      }, 
       {
-        where: { id: req.params.id }
+        department_name: req.body.department
+      }, err => {
+        if (err) return res.render(err);
+        res.redirect('/');
       })
-      .then(() => res.redirect('/'))
-      .catch( err => console.log(err))
+
     });
 
     app.post('/department/delete/:id', (req, res) => {
-      db.department.destroy({
-        where: {
-          id: req.params.id
-        }
-      }).then(() => res.redirect('/'))
+      department.findById(req.params.id, (err, department) => {
+        if (err) return res.render(err)
+        department.remove()
+        res.redirect('/')
+      })
     });
   }

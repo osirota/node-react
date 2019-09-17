@@ -9,8 +9,13 @@
     <h1>Add department</h1>
 
 
-    <form action="<% action %>" method="POST">
-        <input type="text" placeholder="Name Deparment" name="department">
+    <form action="<%= action %>" method="POST">
+            <% if (isUpdating) { %>
+                <h2><% department_name %></h2>
+                <input type="text" placeholder="Name Deparment" name="department" value="<%= department_name %>">
+            <% } else { %>
+                <input type="text" placeholder="Name Deparment" name="department">
+            <% } %>
         <button type="submit">Submit</button>
     </form>
 </body>
