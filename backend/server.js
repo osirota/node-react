@@ -1,8 +1,7 @@
 import express from 'express';
-import bodyParser from 'body-parser';
+import cors from 'cors';
 
-import { db } from './models';
-import routes from "./router";
+import api from "./api";
 
 require('dotenv').config()
 
@@ -10,14 +9,12 @@ const app = express();
 
 const port = process.env.PORT;
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: true
-}));
+
+app.use(cors());
 
 app.set("view engine", "ejs");
 
-routes(app, db)
+app.use('/api', api);
 
 
 app.listen(port, () => {

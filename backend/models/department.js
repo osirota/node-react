@@ -6,7 +6,6 @@ export const departmentTable = (mongoose) => {
   const { Personal } = mongoose.models;
 
   departmentSchema.pre('remove', async function(next) {
-    console.log(this._id)
     await Personal.deleteMany({ department_id: this._id });
     next();
   });
