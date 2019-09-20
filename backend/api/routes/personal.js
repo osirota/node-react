@@ -11,7 +11,7 @@ router.get( "/personals", (req, res) =>
 
 router.get( "/personal/add/:id", (req, res) => {
   const { params: id } = req;
-  res.render('personal', { action: `/add/personal/${id}` })
+  res.render('personal', { action: `/api/add/personal/${id}` })
 });
 
 router.post( "/personal/add/:id", (req, res) => {
@@ -44,4 +44,4 @@ router.post( "/personal/add/:id", (req, res) => {
 
 });
 
-export default () => router;
+export default router;

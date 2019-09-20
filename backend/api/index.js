@@ -8,7 +8,9 @@ import department from "./routes/department";
 const router = Router();
 
 router.use(bodyParser.json());
-
+router.use(bodyParser.urlencoded({
+    extended: true
+  }));
 
 router.use('/personal', personal);
 router.use('/department', department);
@@ -16,4 +18,4 @@ router.use('/department', department);
 router.use(errors);
 
 
-export default () => router;
+export default router;

@@ -7,16 +7,16 @@
 <body>
      
     <h1>Departments</h1>
-    <a href="/department/add">Add Department</a>
+    <a href="/api/department/add">Add Department</a>
     
     <div>
         <% for(var i=0; i < department.length; i++) {%>
             <div>
                 <p class="name"><%= department[i].department_name %></p>
-                <a href="/department/edit/<%= department[i].id %>" class="">Edit Department</a>
-                <a href="/personal/add/<%= department[i].id %>" class="">Add Personal<a>
+                <a href="/api/department/edit/<%= department[i].id %>" class="">Edit Department</a>
+                <a href="/api/personal/add/<%= department[i].id %>" class="">Add Personal<a>
                 <a href="#" class="">All Personal<a>
-                <form action="/department/delete/<%= department[i].id %>" method="POST" style="display:inline;">
+                <form action="/api/department/delete/<%= department[i].id %>" method="POST" style="display:inline;">
                     <input type="submit" value="Delete Department" />
                 </form>
             </div>
