@@ -14,8 +14,12 @@ app.use(cors());
 
 app.set("view engine", "ejs");
 
+
 app.use('/api', api);
 
+app.get("/", (req, res) =>
+    res.render('auth', { action: "/api/auth/signup" })
+);
 
 app.listen(port, () => {
   console.log(`Server listening on http://localhost:${port}/ `);

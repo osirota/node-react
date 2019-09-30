@@ -2,7 +2,10 @@ import mongoose from 'mongoose';
 
 import { personalTable } from './personal';
 import { departmentTable } from './department';
+import { UserTable } from './user';
 
+mongoose.set('useCreateIndex', true)
+mongoose.set('useUnifiedTopology', true)
 mongoose.connect("mongodb://localhost:27017/test", {
   useNewUrlParser: true,
 })
@@ -16,9 +19,11 @@ MongoDB.once('open', function() {
 
 const personal = personalTable(mongoose);
 const department = departmentTable(mongoose);
+const user = UserTable(mongoose);
 
 export const db = {
   mongoose,
   personal,
   department,
+  user
 }
