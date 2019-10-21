@@ -17,7 +17,6 @@ router.use('/personal', personal);
 router.use('/department', department);
 router.use('/auth', auth);
 
-router.use(errors);
 
 
 export default router;

@@ -1,5 +1,6 @@
 import express from 'express';
 import cors from 'cors';
+import cookieParser from 'cookie-parser';
 
 import api from "./api";
 
@@ -11,6 +12,7 @@ const port = process.env.PORT;
 
 
 app.use(cors());
+app.use(cookieParser());
 
 app.set("view engine", "ejs");
 

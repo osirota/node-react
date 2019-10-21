@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { db } from '../../models';
- 
+import auth from '../middleware/auth';
+
 const router = Router();
 
 const { department } = db;
@@ -23,7 +24,7 @@ router.post("/add", (req, res) => {
 
 });
 
-router.get('/', (req, res, next) => {
+router.get('/', auth, (req, res, next) => {
   try {
     department.find((err, department) => res.render('index', { department }));
   } catch(err) {

@@ -3,8 +3,8 @@ import HttpError from '../../lib/HttpError';
 
 const auth = async (req, _, next) => {
   try {
-    const { authorization } = req.headers;
-    const user = Token.verify(authorization);
+    const { token } = req.cookies;
+    const user = Token.verify(token);
     req.user = { ...user };
   } catch (err) {
     if (err.name === 'TokenExpiredError') {
@@ -17,8 +17,8 @@ const auth = async (req, _, next) => {
 
 auth.expired = async (req, _, next) => {
   try {
-    const { authorization } = req.headers;
-    const user = Token.verify(authorization, { ignoreExpiration: true });
+    const { token } = req.cookies;
+    const user = Token.verify(token);
     req.user = { ...user };
   } catch (err) {
     next(new HttpError(401, 'Unauthorized'));
