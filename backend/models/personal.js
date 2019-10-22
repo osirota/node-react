@@ -9,6 +9,6 @@ export const personalTable = (mongoose) => {
   });
 
   const Personal = mongoose.model('Personal', personalSchema);
-
+  
   return Personal;
 }

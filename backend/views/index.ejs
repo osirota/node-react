@@ -7,6 +7,7 @@
 <body>
      
     <h1>Departments</h1>
+    <a href="/api/auth/logout">logout</a>
     <a href="/api/department/add">Add Department</a>
     
     <div>
@@ -15,7 +16,7 @@
                 <p class="name"><%= department[i].department_name %></p>
                 <a href="/api/department/edit/<%= department[i].id %>" class="">Edit Department</a>
                 <a href="/api/personal/add/<%= department[i].id %>" class="">Add Personal<a>
-                <a href="#" class="">All Personal<a>
+                <a href="/api/personals/" class="">All Personal<a>
                 <form action="/api/department/delete/<%= department[i].id %>" method="POST" style="display:inline;">
                     <input type="submit" value="Delete Department" />
                 </form>
