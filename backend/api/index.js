@@ -11,7 +11,7 @@ const router = Router();
 router.use(bodyParser.json());
 router.use(bodyParser.urlencoded({
     extended: true
-  }));
+}));
 
 router.use('/personal', personal);
 router.use('/department', department);

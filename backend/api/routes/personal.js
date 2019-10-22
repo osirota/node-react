@@ -4,17 +4,18 @@ import { db } from '../../models';
 const router = Router();
 
 const { personal } = db;
+console.log('personal', personal)
 
-router.get( "/personals", (req, res) =>
+router.get( "/all", (req, res) =>
   personal.findAll().then((personals) => res.render('personals', { personals }))
 );
 
-router.get( "/personal/add/:id", (req, res) => {
+router.get( "/add/:id", (req, res) => {
   const { params: id } = req;
   res.render('personal', { action: `/api/add/personal/${id}` })
 });
 
-router.post( "/personal/add/:id", (req, res) => {
+router.post( "/add/:id", (req, res) => {
   const {
     body: { 
       first_name,
@@ -39,7 +40,7 @@ router.post( "/personal/add/:id", (req, res) => {
 
   addPersonal.save(err => {
       if (err) return res.render(err)
-      res.redirect('/')
+      res.redirect('/api/department')
   });
 
 });
