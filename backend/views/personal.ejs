@@ -8,14 +8,26 @@
      
     <h1>Add Personal</h1>
 
-
+    
     <form action="<% action %>" method="POST">
-        <input type="text" placeholder="First Name" name="first_name" required>
-        <input type="text" placeholder="Last Name" name="last_name" required>
-        <input type="email" placeholder="Email" name="email" required>
-        <input type="number" placeholder="Salary" name="salary" required>
-        <input type="date" placeholder="date time" name="datetime" required>
-        <button type="submit">Submit</button>
+        <% if (isUpdating) { %>
+            <input type="text" value="<%= fields.personal_firstName %>" name="first_name" required>
+            <input type="text" value="<%= fields.personal_lastName %>" name="last_name" required>
+            <input type="email" value="<%= fields.personal_email %>" name="email" required>
+            <input type="number" value="<%= fields.personal_salary %>" name="salary" required>
+            <input type="date" value="<%= fields.personal_date_started_work %>" name="datetime" required>
+            <button type="submit">Submit</button>
+        <% } else { %>
+            <input type="text" placeholder="First Name" name="first_name" required>
+            <input type="text" placeholder="Last Name" name="last_name" required>
+            <input type="email" placeholder="Email" name="email" required>
+            <input type="number" placeholder="Salary" name="salary" required>
+            <input type="date" placeholder="date time" name="datetime" required>
+            <button type="submit">Submit</button>
+        <% } %>
     </form>
+    <% if (isErrors) { %>
+        <p><%= textErrors %></p>
+    <% } %>
 </body>
 <html>

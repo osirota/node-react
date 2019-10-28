@@ -12,7 +12,11 @@
     <div>
         <% for(var i=0; i < personals.length; i++) {%>
             <div>
-                <p class="name"><%= personals[i].departmentId %></p>
+                <p class="name"><%= personals[i].personal_firstName%> <%= personals[i].personal_lastName%></p>
+                <a href="/api/personal/edit/<%= personals[i].id %>" class="">Edit personal</a>
+                <form action="/api/personal/delete/<%= personals[i].id %>" method="POST" style="display:inline;">
+                    <input type="submit" value="Delete personal" />
+                </form>
             </div>
         <%} %>
     </ul>

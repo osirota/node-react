@@ -17,6 +17,9 @@
                 <input type="text" placeholder="Name Deparment" name="department">
             <% } %>
         <button type="submit">Submit</button>
+        <% if (isErrors) { %>
+            <p><%= textErrors %></p>
+        <% } %>
     </form>
 </body>
 <html>
