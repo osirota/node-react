@@ -1,17 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { Provider } from 'react-redux';
+import { Provider } from 'react-redux'
+import { Router, Route, hashHistory } from 'react-router-dom'
+import { syncHistoryWithStore } from 'react-router-redux';
 
 import store from './store';
 import './index.css';
 import App from './App';
 
 import * as serviceWorker from './serviceWorker';
-console.log(store)
+
+const history = syncHistoryWithStore(hashHistory, store)
 const render = (Component) => {
     ReactDOM.render(
       <Provider store={store}>
-        <Component />
+        <Router history={history}>
+          <Route path="/" component={App}>
+          </Route>
+        </Router>
       </Provider>,
       document.getElementById('root'), // eslint-disable-line
     );

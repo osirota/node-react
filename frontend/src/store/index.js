@@ -1,8 +1,9 @@
 import { createStore } from "redux";
+import { routerReducer } from 'react-router-redux'
 import rootReducer from "../reducers";
-console.log(rootReducer)
+
 const store = createStore(
-    rootReducer,
+    routerReducer({ ...rootReducer, routing: routerReducer }),
     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
