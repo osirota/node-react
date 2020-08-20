@@ -5,7 +5,7 @@
         "start": "nodemon --exec babel-node server.js PORT=9000 NODE_ENV=development"
     },
     "dependencies": {
-        "bcrypt": "^3.0.6",
+        "bcrypt": "^5.0.0",
         "cookie-parser": "^1.4.4",
         "cors": "^2.8.5",
         "ejs": "^2.6.2",
